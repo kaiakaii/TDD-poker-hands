@@ -30,4 +30,12 @@ public class Level {
         }
         return flag == 2;
     }
+    public static boolean isThreeKinds(List<Card> cards) {
+        Set<Integer> cardIndexs = new HashSet<>();
+        cards.forEach(card -> cardIndexs.add(card.getIndex()));
+        if (cards.size() - cardIndexs.size() == 2) {
+            return true;
+        }
+        return false;
+    }
 }

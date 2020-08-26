@@ -3,8 +3,7 @@ package com.example;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.Level.isPair;
-import static com.example.Level.isTwoPair;
+import static com.example.Level.*;
 
 
 public class Process {
@@ -51,6 +50,9 @@ public class Process {
     }
 
     private int getCardsLevel(List<Card> cards) {
+        if (isThreeKinds(cards)){
+            return 4;
+        }
         if (isTwoPair(cards)) {
             return 3;
         }
