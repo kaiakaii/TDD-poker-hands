@@ -1,13 +1,13 @@
 package com.example;
 
-public class Car {
+public class Card {
     private String value;
     private String flowerColor;
     private Integer index;
-    public Car() {
+    public Card() {
     }
 
-    public Car(String value, String flowerColor, Integer index) {
+    public Card(String value, String flowerColor, Integer index) {
         this.value = value;
         this.flowerColor = flowerColor;
         this.index = index;

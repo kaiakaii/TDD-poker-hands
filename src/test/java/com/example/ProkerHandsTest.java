@@ -16,4 +16,15 @@ public class ProkerHandsTest {
         //then
         assertEquals(winner,"white wins");
     }
+
+    @Test
+    void should_return_winner_when_process_given_pair_and_high_card() {
+        //given
+        String white = "QD QS 4H 6H 7C";
+        String black = "5D 2D 7H QD 6S";
+        //when
+        String winner = process.start(white,black);
+        //then
+        assertEquals("white wins",winner);
+    }
 }

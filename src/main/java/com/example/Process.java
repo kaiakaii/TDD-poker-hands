@@ -3,9 +3,14 @@ package com.example;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.example.Level.isPair;
+
+
 public class Process {
-    private List<Car> whiteCars = new ArrayList<Car>();
-    private List<Car> blackCars = new ArrayList<Car>();
+    private static final String WHITE_WINS = "white wins";
+    private static final String BLACK_WINS = "black wins";
+    private List<Card> whiteCards = new ArrayList<Card>();
+    private List<Card> blackCards = new ArrayList<Card>();
     private final static Map<String, Integer> maps = new HashMap<String, Integer>();
 
     static {
@@ -23,23 +28,42 @@ public class Process {
 
     public String start(String white, String black) {
         initCarList(white, black);
-        whiteCars = whiteCars.stream().sorted((e1, e2) -> e1.getIndex() - e2.getIndex()).collect(Collectors.toList());
-        blackCars = blackCars.stream().sorted((e1, e2) -> e1.getIndex() - e2.getIndex()).collect(Collectors.toList());
-        if (whiteCars.get(whiteCars.size() - 1).getIndex() > blackCars.get(blackCars.size()-1).getIndex()){
-            return "white wins";
+        whiteCards = whiteCards.stream().sorted((e1, e2) -> e1.getIndex() - e2.getIndex()).collect(Collectors.toList());
+        blackCards = blackCards.stream().sorted((e1, e2) -> e1.getIndex() - e2.getIndex()).collect(Collectors.toList());
+        int whiteLevel = getCardsLevel(whiteCards);
+        int blackLevel = getCardsLevel(blackCards);
+        if (whiteLevel > blackLevel){
+            return WHITE_WINS;
+        }else if(whiteLevel < blackLevel){
+            return BLACK_WINS;
         }else {
-            return "black wins";
+            return dealSameLevel();
         }
+    }
+
+    private String dealSameLevel() {
+        if (whiteCards.get(whiteCards.size() - 1).getIndex() > blackCards.get(blackCards.size()-1).getIndex()){
+            return WHITE_WINS;
+        }else {
+            return BLACK_WINS;
+        }
+    }
+
+    private int getCardsLevel(List<Card> cards) {
+        if(isPair(cards)){
+            return 2;
+        }
+        return 1;
     }
 
     private void initCarList(String white, String black) {
         Arrays.stream(white.split(" "))
                 .forEach(
-                        el -> whiteCars.add(new Car(String.valueOf(el.charAt(0)), String.valueOf(el.charAt(1)), maps.get(String.valueOf(el.charAt(0)))))
+                        el -> whiteCards.add(new Card(String.valueOf(el.charAt(0)), String.valueOf(el.charAt(1)), maps.get(String.valueOf(el.charAt(0)))))
                 );
         Arrays.stream(black.split(" "))
                 .forEach(
-                        el -> blackCars.add(new Car(String.valueOf(el.charAt(0)), String.valueOf(el.charAt(1)), maps.get(String.valueOf(el.charAt(0)))))
+                        el -> blackCards.add(new Card(String.valueOf(el.charAt(0)), String.valueOf(el.charAt(1)), maps.get(String.valueOf(el.charAt(0)))))
                 );
     }
 }
