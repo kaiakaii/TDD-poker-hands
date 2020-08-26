@@ -61,4 +61,15 @@ public class ProkerHandsTest {
         assertEquals("black wins",winner);
 
     }
+    @Test
+    void should_return_winner_when_process_given_three_of_flush_and_straight() {
+        //given
+        String white = "QH 2H 4H 6H 7H";
+        String black = "5D 6D 7H 8D 9S";
+        //when
+        String winner = process.start(white,black);
+        //then
+        assertEquals("white wins",winner);
+
+    }
 }

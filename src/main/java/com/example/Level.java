@@ -48,4 +48,12 @@ public class Level {
         }
         return true;
     }
+    public static boolean isFlush(List<Card> cards) {
+        Set<String> cardIndexs = new HashSet<>();
+        cards.forEach(card -> cardIndexs.add(card.getFlowerColor()));
+        if (cardIndexs.size() == 1) {
+            return true;
+        }
+        return false;
+    }
 }
