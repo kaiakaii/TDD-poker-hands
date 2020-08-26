@@ -50,6 +50,9 @@ public class Process {
     }
 
     private int getCardsLevel(List<Card> cards) {
+        if (isFullHouse(cards)){
+            return 7;
+        }
         if (isFlush(cards)){
             return 6;
         }

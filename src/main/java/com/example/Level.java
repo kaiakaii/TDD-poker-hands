@@ -56,4 +56,21 @@ public class Level {
         }
         return false;
     }
+    public static boolean isFullHouse(List<Card> cards) {
+        HashMap<Integer, Integer> cardIndexTimes = new HashMap<>();
+        for (Card card : cards) {
+            Integer indexTime = cardIndexTimes.getOrDefault(card.getIndex(), 0);
+            cardIndexTimes.put(card.getIndex(), indexTime + 1);
+        }
+        int flag = 0;
+        if(cardIndexTimes.size() != 2) {
+            return false;
+        }
+        for (Integer val : cardIndexTimes.values()) {
+            if (!(val == 2 || val == 3)) {
+                flag++;
+            }
+        }
+        return flag == 0;
+    }
 }
