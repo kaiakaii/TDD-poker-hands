@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.example.Level.isPair;
+import static com.example.Level.isTwoPair;
 
 
 public class Process {
@@ -32,25 +33,28 @@ public class Process {
         blackCards = blackCards.stream().sorted((e1, e2) -> e1.getIndex() - e2.getIndex()).collect(Collectors.toList());
         int whiteLevel = getCardsLevel(whiteCards);
         int blackLevel = getCardsLevel(blackCards);
-        if (whiteLevel > blackLevel){
+        if (whiteLevel > blackLevel) {
             return WHITE_WINS;
-        }else if(whiteLevel < blackLevel){
+        } else if (whiteLevel < blackLevel) {
             return BLACK_WINS;
-        }else {
+        } else {
             return dealSameLevel();
         }
     }
 
     private String dealSameLevel() {
-        if (whiteCards.get(whiteCards.size() - 1).getIndex() > blackCards.get(blackCards.size()-1).getIndex()){
+        if (whiteCards.get(whiteCards.size() - 1).getIndex() > blackCards.get(blackCards.size() - 1).getIndex()) {
             return WHITE_WINS;
-        }else {
+        } else {
             return BLACK_WINS;
         }
     }
 
     private int getCardsLevel(List<Card> cards) {
-        if(isPair(cards)){
+        if (isTwoPair(cards)) {
+            return 3;
+        }
+        if (isPair(cards)) {
             return 2;
         }
         return 1;

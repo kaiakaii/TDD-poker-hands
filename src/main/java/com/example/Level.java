@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,5 +14,20 @@ public class Level {
             return true;
         }
         return false;
+    }
+
+    public static boolean isTwoPair(List<Card> cards) {
+        HashMap<Integer, Integer> cardIndexTimes = new HashMap<>();
+        for (Card card : cards) {
+            Integer indexTime = cardIndexTimes.getOrDefault(card.getIndex(), 0);
+            cardIndexTimes.put(card.getIndex(), indexTime + 1);
+        }
+        int flag = 0;
+        for (Integer val : cardIndexTimes.values()) {
+            if (val == 2) {
+                flag++;
+            }
+        }
+        return flag == 2;
     }
 }
