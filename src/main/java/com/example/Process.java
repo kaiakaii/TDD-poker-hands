@@ -50,6 +50,9 @@ public class Process {
     }
 
     private int getCardsLevel(List<Card> cards) {
+        if (isStraight(cards)){
+            return 5;
+        }
         if (isThreeKinds(cards)){
             return 4;
         }

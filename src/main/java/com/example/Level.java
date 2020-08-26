@@ -30,6 +30,7 @@ public class Level {
         }
         return flag == 2;
     }
+
     public static boolean isThreeKinds(List<Card> cards) {
         Set<Integer> cardIndexs = new HashSet<>();
         cards.forEach(card -> cardIndexs.add(card.getIndex()));
@@ -37,5 +38,14 @@ public class Level {
             return true;
         }
         return false;
+    }
+
+    public static boolean isStraight(List<Card> cards) {
+        for (int i = 1; i < cards.size(); i++) {
+            if (cards.get(i).getIndex()-cards.get(i-1).getIndex() != 1){
+                return false;
+            }
+        }
+        return true;
     }
 }
